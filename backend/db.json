@@ -1,3 +1,10 @@
 {
-  "pensamentos": []
+  "pensamentos": [
+    {
+      "id": "0274",
+      "conteudo": "Pensamento",
+      "autoria": "dev",
+      "data": "2024-12-01T00:00:00.000Z"
+    }
+  ]
 }

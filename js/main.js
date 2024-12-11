@@ -1,6 +1,21 @@
 import ui from "./ui.js";
 import api from "./api.js";
 
+const regexConteudo = /^[A-Za-z\s]{10,}$/;
+const regexAutoria = /^[A-Za-z]{3,15}$/;
+
+function removerEspaços(string){
+  return string.replaceAll(/\s+/g, '')
+}
+
+function validarConteudo(conteudo) {
+  return regexConteudo.test(conteudo);
+}
+
+function validarAutoria(autoria) {
+  return regexAutoria.test(autoria);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   ui.renderizarPensamentos();
 
@@ -19,6 +34,18 @@ async function manipularSubmissaoFormulario(event) {
   const conteudo = document.getElementById("pensamento-conteudo").value;
   const autoria = document.getElementById("pensamento-autoria").value;
   const data = document.getElementById("pensamento-data").value;
+  const conteudoSemEspaços = removerEspaços(conteudo)
+  const autoriaSemEspaços = removerEspaços(autoria)
+
+  if (!validarConteudo(conteudoSemEspaços)) {
+    alert("Apenas letras e espaços de no minimo 10 caracteres");
+    return;
+  }
+
+  if (!validarAutoria(autoriaSemEspaços)) {
+    alert("Apenas letras, entre 3 a 15 caracteres e sem espaços");
+    return;
+  }
 
   if (!validarData(data)) {
     alert("Cadastro de datas futuras não permitido");
@@ -54,6 +81,6 @@ async function manipularBusca() {
 function validarData(data) {
   const dataAtual = new Date();
   const dataInserida = new Date(data);
-  
+
   return dataInserida <= dataAtual;
 }
