@@ -5,6 +5,12 @@
       "conteudo": "Pensamento",
       "autoria": "dev",
       "data": "2024-12-01T00:00:00.000Z"
+    },
+    {
+      "id": "9663",
+      "conteudo": "Pensamento novo",
+      "autoria": "dev",
+      "data": "2024-12-04"
     }
   ]
 }
