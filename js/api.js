@@ -2,88 +2,85 @@ const URL_BASE = "http://localhost:3000";
 
 const converterData = (dataString) => {
   const [ano, mes, dia] = dataString.split("-");
-  return new Date(Date.UTC(ano, mes-1, dia));
+  return new Date(Date.UTC(ano, mes - 1, dia));
 };
 
 const api = {
-  async buscarPensamentos() {
+  async buscarideias() {
     try {
-      const response = await axios.get(`${URL_BASE}/pensamentos`);
-      const pensamentos = await response.data;
-      return pensamentos.map((pensamento) => {
+      const response = await axios.get(`${URL_BASE}/ideias`);
+      const ideias = await response.data;
+      return ideias.map((ideia) => {
         return {
-          ...pensamento,
-          data: new Date(pensamento.data),
+          ...ideia,
+          data: new Date(ideia.data),
         };
       });
     } catch {
-      alert("Erro ao buscar pensamentos");
+      alert("Erro ao buscar ideias");
       throw error;
     }
   },
 
-  async salvarPensamento(pensamento) {
+  async salvarideia(ideia) {
     try {
-      const data = converterData(pensamento.data);
-      const response = await axios.post(`${URL_BASE}/pensamentos`, {
-        ...pensamento,
+      const data = converterData(ideia.data);
+      const response = await axios.post(`${URL_BASE}/ideias`, {
+        ...ideia,
         data: data.toISOString(),
       });
       return await response.data;
     } catch {
-      alert("Erro ao salvar pensamento");
+      alert("Erro ao salvar ideia");
       throw error;
     }
   },
 
-  async buscarPensamentoPorId(id) {
+  async buscarideiaPorId(id) {
     try {
-      const response = await axios.get(`${URL_BASE}/pensamentos/${id}`);
-      const pensamento = await response.data;
+      const response = await axios.get(`${URL_BASE}/ideias/${id}`);
+      const ideia = await response.data;
 
       return {
-        ...pensamento,
-        data: new Date(pensamento.data),
+        ...ideia,
+        data: new Date(ideia.data),
       };
     } catch {
-      alert("Erro ao buscar pensamento");
+      alert("Erro ao buscar ideia");
       throw error;
     }
   },
 
-  async editarPensamento(pensamento) {
+  async editarideia(ideia) {
     try {
-      const response = await axios.put(
-        `${URL_BASE}/pensamentos/${pensamento.id}`,
-        pensamento
-      );
+      const response = await axios.put(`${URL_BASE}/ideias/${ideia.id}`, ideia);
       return await response.data;
     } catch {
-      alert("Erro ao editar pensamento");
+      alert("Erro ao editar ideia");
       throw error;
     }
   },
 
-  async excluirPensamento(id) {
+  async excluirideia(id) {
     try {
-      await axios.delete(`${URL_BASE}/pensamentos/${id}`);
+      await axios.delete(`${URL_BASE}/ideias/${id}`);
     } catch {
-      alert("Erro ao excluir um pensamento");
+      alert("Erro ao excluir um ideia");
       throw error;
     }
   },
 
-  async buscarPensamentoPorTermo(palavra) {
+  async buscarideiaPorTermo(palavra) {
     try {
-      const pensamentos = await this.buscarPensamentos();
       const termolower = palavra.toLowerCase();
-      const pensamentosFiltrados = pensamentos.filter((pensamento) => {
+      const ideias = await this.buscarideias();
+      const ideiasFiltrados = ideias.filter((ideia) => {
         return (
-          pensamento.conteudo.toLowerCase().includes(termolower) ||
-          pensamento.autoria.toLowerCase().includes(termolower)
+          ideia.conteudo.toLowerCase().includes(termolower) ||
+          ideia.autoria.toLowerCase().includes(termolower)
         );
       });
-      return pensamentosFiltrados;
+      return ideiasFiltrados;
     } catch {
       alert("erro ao filtrar conteudo na API");
     }
@@ -91,12 +88,12 @@ const api = {
 
   async atualizarFavorito(id, favorito) {
     try {
-      const response = await axios.patch(`${URL_BASE}/pensamentos/${id}`, {
+      const response = await axios.patch(`${URL_BASE}/ideias/${id}`, {
         favorito,
       });
       return await response.data;
     } catch {
-      alert("Erro ao editar pensamento");
+      alert("Erro ao editar ideia");
       throw error;
     }
   },

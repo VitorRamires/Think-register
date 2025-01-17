@@ -3,23 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRUD de Pensamentos</title>
+    <title>CRUD de ideias</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <header>
       <div class="conteudo-cabecalho">
-        <div class="logo">
-          <img src="assets/imagens/logo.png" alt="" />
-          <h1>
-            Trechos de músicas,<br />
-            citações de livros e <br />
-            <strong
-              >suas melhores ideias <br />
-              num só lugar!</strong
-            >
-          </h1>
-        </div>
         <div class="imagem-cabecalho">
           <img src="assets/imagens/computador-cabecalho.png" alt="" />
         </div>
@@ -28,25 +17,25 @@
     <main class="background-overlay">
       <div class="overlay"></div>
       <div class="overlay overlay-color"></div>
-      <h2>Adicione um pensamento novo:</h2>
+      <h2>Adicione um ideia novo:</h2>
       <section id="form-container">
-        <form id="pensamento-form">
-          <input type="hidden" id="pensamento-id" />
-          <label for="pensamento-conteudo">Pensamento</label>
+        <form id="ideia-form">
+          <input type="hidden" id="ideia-id" />
+          <label for="ideia-conteudo">ideia</label>
           <textarea
-            id="pensamento-conteudo"
-            placeholder="Digite seu pensamento"
+            id="ideia-conteudo"
+            placeholder="Digite seu ideia"
             required
           ></textarea>
-          <label for="pensamento-autoria">Autoria ou Fonte</label>
+          <label for="ideia-autoria">Autoria ou Fonte</label>
           <input
             type="text"
-            id="pensamento-autoria"
+            id="ideia-autoria"
             placeholder="Insira a autoria ou fonte"
             required
           />
-          <label for="pensamento-data">Data</label>
-          <input type="Date" id="pensamento-data" />
+          <label for="ideia-data">Data</label>
+          <input type="Date" id="ideia-data" />
           <div class="form-botoes">
             <button type="submit" id="botao-salvar">Salvar</button>
             <button type="button" id="botao-cancelar">Cancelar</button>
@@ -54,8 +43,8 @@
         </form>
       </section>
       <span></span>
-      <section id="lista-pensamentos-container">
-        <h3>Meu Mural</h3>
+      <section id="lista-ideias-container">
+        <h3>Ideias</h3>
         <section id="busca-container">
           <input
             type="text"
@@ -67,19 +56,14 @@
         <div id="mensagem-vazia" class="mensagem-vazia">
           <img
             src="assets/imagens/lista-vazia.png"
-            alt="Nenhum pensamento disponível"
+            alt="Nenhum ideia disponível"
           />
-          <p>Nada por aqui ainda, que tal compartilhar alguma ideia?</p>
+          <p>Coloque sua ideia aqui</p>
         </div>
-        <ul id="lista-pensamentos"></ul>
+        <ul id="lista-ideias"></ul>
       </section>
     </main>
-    <footer>
-      <p>
-        &copy; 2024 Desenvolvido por Alura. Projeto fictício sem fins
-        comerciais.
-      </p>
-    </footer>
+    <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script type="module" src="js/api.js"></script>
     <script type="module" src="js/main.js"></script>

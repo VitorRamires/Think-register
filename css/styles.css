@@ -118,7 +118,7 @@ h3 {
   margin-top: 40px;
 }
 
-#pensamento-form {
+#ideia-form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -153,9 +153,9 @@ h3 {
   height: 24px;
 }
 
-#pensamento-conteudo,
-#pensamento-autoria,
-#pensamento-data {
+#ideia-conteudo,
+#ideia-autoria,
+#ideia-data {
   padding: 16px;
   border-radius: 8px;
   background: var(--Cinza-claro, #edf0f4);
@@ -163,11 +163,11 @@ h3 {
   overflow-wrap: break-word;
 }
 
-#pensamento-conteudo {
+#ideia-conteudo {
   min-height: 80px;
 }
 
-#pensamento-form label {
+#ideia-form label {
   margin-bottom: 16px;
   color: var(--Azul-Dark, #041832);
   font-family: "Poppins", sans-serif;
@@ -177,8 +177,8 @@ h3 {
   line-height: normal;
 }
 
-#pensamento-conteudo::placeholder,
-#pensamento-autoria::placeholder {
+#ideia-conteudo::placeholder,
+#ideia-autoria::placeholder {
   color: var(--Cinza-medio, #8f8f8f);
   font-family: "Poppins", sans-serif;
   font-size: 16px;
@@ -187,8 +187,8 @@ h3 {
   line-height: normal;
 }
 
-#pensamento-form textarea,
-#pensamento-form input {
+#ideia-form textarea,
+#ideia-form input {
   margin-bottom: 24px;
   outline: none;
   border-style: none;
@@ -224,17 +224,17 @@ h3 {
   color: var(--Azul-Dark, #041832);
 }
 
-#lista-pensamentos-container {
+#lista-ideias-container {
   width: 100%;
   max-width: 1200px;
   margin: 40px 0;
 }
 
-#lista-pensamentos-container h3 {
+#lista-ideias-container h3 {
   margin: 40px 0;
 }
 
-#lista-pensamentos {
+#lista-ideias {
   list-style: none;
   padding: 0;
   display: flex;
@@ -244,7 +244,7 @@ h3 {
   column-gap: 24px;
 }
 
-.li-pensamento {
+.li-ideia {
   position: relative;
   padding: 16px;
   background: var(--Branco, #fff);
@@ -268,9 +268,9 @@ h3 {
   height: 50px;
 }
 
-.pensamento-conteudo,
-.pensamento-autoria,
-.pensamento-data {
+.ideia-conteudo,
+.ideia-autoria,
+.ideia-data {
   margin-left: 20px;
   color: var(--Cinza, #444);
   font-family: "Roboto Mono";
@@ -282,18 +282,18 @@ h3 {
   hyphens: auto;
 }
 
-.pensamento-conteudo {
+.ideia-conteudo {
   margin-top: 96px;
   font-size: 20px;
   font-weight: 400;
 }
 
-.pensamento-autoria {
+.ideia-autoria {
   font-size: 22px;
   font-weight: 600;
 }
 
-.pensamento-data {
+.ideia-data {
   font-size: 18px;
   font-weight: 400;
   text-align: end;

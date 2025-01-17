@@ -1,79 +1,79 @@
 import api from "./api.js";
 
 const ui = {
-  async preencherFormulario(pensamentoId) {
-    const pensamento = await api.buscarPensamentoPorId(pensamentoId);
-    document.getElementById("pensamento-id").value = pensamento.id;
-    document.getElementById("pensamento-conteudo").value = pensamento.conteudo;
-    document.getElementById("pensamento-autoria").value = pensamento.autoria;
-    document.getElementById("pensamento-data").value = pensamento.data.toISOString().split("T")[0];
-    document.getElementById("form-container").scrollIntoView()
+  async preencherFormulario(ideiaId) {
+    const ideia = await api.buscarideiaPorId(ideiaId);
+    document.getElementById("ideia-id").value = ideia.id;
+    document.getElementById("ideia-conteudo").value = ideia.conteudo;
+    document.getElementById("ideia-autoria").value = ideia.autoria;
+    document.getElementById("ideia-data").value = ideia.data
+      .toISOString()
+      .split("T")[0];
+    document.getElementById("form-container").scrollIntoView();
   },
 
   limparFormulario() {
-    document.getElementById("pensamento-form").reset();
+    document.getElementById("ideia-form").reset();
   },
 
-  async renderizarPensamentos(pensamentosFiltrados = null) {
-    const listaPensamentos = document.getElementById("lista-pensamentos");
+  async renderizarideias(ideiasFiltrados = null) {
+    const listaideias = document.getElementById("lista-ideias");
     const mensagemVazia = document.getElementById("mensagem-vazia");
-    listaPensamentos.innerHTML = "";
+    listaideias.innerHTML = "";
 
     try {
-      let pensamentosARenderizar;
+      let ideiasARenderizar;
 
-      if (pensamentosFiltrados) {
-        pensamentosARenderizar = pensamentosFiltrados;
+      if (ideiasFiltrados) {
+        ideiasARenderizar = ideiasFiltrados;
       } else {
-        pensamentosARenderizar = await api.buscarPensamentos();
+        ideiasARenderizar = await api.buscarideias();
       }
 
-      if (pensamentosARenderizar.length === 0) {
+      if (ideiasARenderizar.length === 0) {
         mensagemVazia.style.display = "block";
       } else {
         mensagemVazia.style.display = "none";
-        pensamentosARenderizar.forEach(ui.adicionarPensamentoNaLista);
+        ideiasARenderizar.forEach(ui.adicionarideiaNaLista);
       }
     } catch {
-      alert("Erro ao renderizar pensamentos");
+      alert("Erro ao renderizar ideias");
     }
   },
 
-  adicionarPensamentoNaLista(pensamento) {
-    const listaPensamentos = document.getElementById("lista-pensamentos");
+  adicionarideiaNaLista(ideia) {
+    const listaideias = document.getElementById("lista-ideias");
     const li = document.createElement("li");
-    li.setAttribute("data-id", pensamento.id);
-    li.classList.add("li-pensamento");
+    li.setAttribute("data-id", ideia.id);
+    li.classList.add("li-ideia");
 
     const iconeAspas = document.createElement("img");
     iconeAspas.src = "assets/imagens/aspas-azuis.png";
     iconeAspas.alt = "Aspas azuis";
     iconeAspas.classList.add("icone-aspas");
 
-    const pensamentoConteudo = document.createElement("div");
-    pensamentoConteudo.textContent = pensamento.conteudo;
-    pensamentoConteudo.classList.add("pensamento-conteudo");
+    const ideiaConteudo = document.createElement("div");
+    ideiaConteudo.textContent = ideia.conteudo;
+    ideiaConteudo.classList.add("ideia-conteudo");
 
-    const pensamentoAutoria = document.createElement("div");
-    pensamentoAutoria.textContent = pensamento.autoria;
-    pensamentoAutoria.classList.add("pensamento-autoria");
+    const ideiaAutoria = document.createElement("div");
+    ideiaAutoria.textContent = ideia.autoria;
+    ideiaAutoria.classList.add("ideia-autoria");
 
-
-    
-    const pensamentoData = document.createElement("div");
+    const ideiaData = document.createElement("div");
     let options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }
-    const dataFormatada =  pensamento.data.toLocaleDateString('pt-BR', options)
-    pensamentoData.textContent = dataFormatada;
-    pensamentoData.classList.add("pensamento-data");
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    const dataFormatada = ideia.data.toLocaleDateString("pt-BR", options);
+    ideiaData.textContent = dataFormatada;
+    ideiaData.classList.add("ideia-data");
 
     const botaoEditar = document.createElement("button");
     botaoEditar.classList.add("botao-editar");
-    botaoEditar.onclick = () => ui.preencherFormulario(pensamento.id);
+    botaoEditar.onclick = () => ui.preencherFormulario(ideia.id);
 
     const iconeEditar = document.createElement("img");
     iconeEditar.src = "assets/imagens/icone-editar.png";
@@ -84,10 +84,10 @@ const ui = {
     botaoExcluir.classList.add("botao-excluir");
     botaoExcluir.onclick = async () => {
       try {
-        await api.excluirPensamento(pensamento.id);
-        ui.renderizarPensamentos();
+        await api.excluirideia(ideia.id);
+        ui.renderizarideias();
       } catch (error) {
-        alert("Erro ao excluir pensamento");
+        alert("Erro ao excluir ideia");
       }
     };
 
@@ -95,15 +95,15 @@ const ui = {
     botaoFavoritar.classList.add("botao-favorito");
     botaoFavoritar.onclick = async () => {
       try {
-        await api.atualizarFavorito(pensamento.id, !pensamento.favorito)
-        ui.renderizarPensamentos()
+        await api.atualizarFavorito(ideia.id, !ideia.favorito);
+        ui.renderizarideias();
       } catch (error) {
-        alert('erro ao favoritar')
+        alert("erro ao favoritar");
       }
-    }
+    };
 
     const iconeFavoritar = document.createElement("img");
-    iconeFavoritar.src = pensamento.favorito
+    iconeFavoritar.src = ideia.favorito
       ? "assets/imagens/icone-favorito.png"
       : "assets/imagens/icone-favorito_outline.png";
     iconeFavoritar.alt = "Favoritar";
@@ -121,12 +121,12 @@ const ui = {
     icones.appendChild(botaoFavoritar);
 
     li.appendChild(iconeAspas);
-    li.appendChild(pensamentoConteudo);
-    li.appendChild(pensamentoAutoria);
-    li.appendChild(pensamentoData);
+    li.appendChild(ideiaConteudo);
+    li.appendChild(ideiaAutoria);
+    li.appendChild(ideiaData);
     li.appendChild(icones);
-  
-    listaPensamentos.appendChild(li);
+
+    listaideias.appendChild(li);
   },
 };
 
